@@ -20,10 +20,8 @@
 #LOAD MODULES, INSERT CODE, AND RUN PROGRAMS HERE
 eval "$(conda shell.bash hook)"
 
-conda activate blast
+conda activate ENVIROMENT
 
-blastn -query unknown_seqs/sequence-3.fasta -db ../../inclass_exercise1/SILVA_DB/SILVA_DB -out blast4.out -outfmt 6
+#code
 
-
-sleep 100
 echo done
