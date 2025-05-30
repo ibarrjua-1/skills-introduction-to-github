@@ -7,11 +7,11 @@
 #SBATCH --cpus-per-task=12           # Number of CPU cores per task
 #SBATCH --nodes=1                    # Number of nodes
 #SBATCH --mem=20GB                   # Memory
-#SBATCH -J metaspades.e%j            # Job name
+#SBATCH -J NAME .e%j            # Job name
 #SBATCH --array=1-21                 # Array range (update based on number of FASTA files)
 
 # Email notifications
-#SBATCH --mail-user=jibarraa@caltech.edu
+#SBATCH --mail-user=$USER@caltech.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
 # Optional output/error files
@@ -21,10 +21,10 @@
 
 # Load required modules
 module load mafft
-module load hmmer
+
 
 # Define the directory containing .fasta files
-fasta_dir="/groups/enviromics/sal/nadia/hmms"  # Update with the correct path
+fasta_dir=""  # Update with the correct path
 
 # Create an array of .fasta files
 fasta_files=(${fasta_dir}/*.fasta)
@@ -42,5 +42,3 @@ hmm_file="${fasta_file}.hmm"
 # Run MAFFT alignment
 mafft "${fasta_file}" > "${aligned_file}"
 
-# Build HMM profile
-hmmbuild "${hmm_file}" "${aligned_file}"
